@@ -110,14 +110,161 @@ promesa4
 # 7 Promesas en paralelo: Crea tres promesas que se resuelvan después de 1, 2 y 3 segundos respectivamente. Utiliza Promise.all() para esperar a que todas ellas se resuelvan.
 ```
 
+```js
+let promesa = new Promise((resolve, rejected) => {
+  resolve(
+    setTimeout(() => {
+      console.log("¡Promesa resuelta!");
+    }, 2000)
+  );
+});
+console.log(promesa);
+
+let promesa2 = new Promise((resolve, rejected) => {
+  resolve(
+    setTimeout(() => {
+      console.log("¡Promesa resuelta!");
+    }, 2000)
+  );
+});
+console.log(promesa2);
+
+let promesa3 = new Promise((resolve, rejected) => {
+  resolve(
+    setTimeout(() => {
+      console.log("¡Promesa resuelta!");
+    }, 2000)
+  );
+});
+console.log(promesa3);
+
+Promise.all([promesa, promesa2, promesa3])
+  .then((resultado) => {
+    console.log("Se han resuelto las 3 promesas", resultado);
+  })
+  .catch((error) => {
+    console.error("Ha occurrido un error", error);
+  });
+```
+
 ```md
 # 8 Promesas en serie: Crea tres promesas similares a las del ejercicio 7, pero en lugar de resolverlas en paralelo, encadena las promesas para que se resuelvan en serie, una tras otra.
+```
+
+```js
+let promesa = new Promise((resolve, rejected) => {
+  resolve(
+    setTimeout(() => {
+      console.log("¡Promesa resuelta!");
+    }, 2000)
+  );
+});
+console.log(promesa);
+
+let promesa2 = new Promise((resolve, rejected) => {
+  resolve(
+    setTimeout(() => {
+      console.log("¡Promesa resuelta!");
+    }, 2000)
+  );
+});
+console.log(promesa2);
+
+let promesa3 = new Promise((resolve, rejected) => {
+  resolve(
+    setTimeout(() => {
+      console.log("¡Promesa resuelta!");
+    }, 2000)
+  );
+});
+console.log(promesa3);
+
+promesa
+  .then((resultPromesa) => {
+    console.log(resultPromesa);
+    return promesa2;
+  })
+  .then((resultPromesa2) => {
+    console.log(resultPromesa2);
+    return promesa3;
+  })
+  .then((resultPromesa3) => {
+    console.log(resultPromesa3);
+  })
+  .catch((error) => {
+    console.error("Ha occurrido un error", error);
+  });
 ```
 
 ```md
 # 9 Promise.race(): Crea dos promesas, una que se resuelva después de 1 segundo y otra que se rechace después de 2 segundos. Utiliza Promise.race() y maneja tanto la resolución como el rechazo.
 ```
 
+```js
+let promesa = new Promise((resolve, rejected) => {
+  resolve(
+    setTimeout(() => {
+      console.log("¡Promesa resuelta!");
+    }, 1000)
+  );
+});
+console.log(promesa);
+
+let promesa2 = new Promise((resolve, rejected) => {
+  setTimeout(() => {
+    rejected(new Error("Se ha producido un error"));
+  }, 2000);
+});
+console.log(promesa2);
+
+Promise.race([promesa, promesa2])
+  .then((result) => {
+    console.log("Promesa resuelta:", result);
+  })
+  .catch((error) => {
+    console.log("Promesa2 rechazada:", error.message);
+  });
+```
+
 ```md
 # 10 Async/await (PARA INVESTIGAR): Reescribe el ejercicio 7 utilizando async/await en lugar de .then() y .catch().
+```
+
+```js
+let promesa = new Promise((resolve, rejected) => {
+  resolve(
+    setTimeout(() => {
+      console.log("¡Promesa resuelta!");
+    }, 2000)
+  );
+});
+console.log(promesa);
+
+let promesa2 = new Promise((resolve, rejected) => {
+  resolve(
+    setTimeout(() => {
+      console.log("¡Promesa resuelta!");
+    }, 2000)
+  );
+});
+console.log(promesa2);
+
+let promesa3 = new Promise((resolve, rejected) => {
+  resolve(
+    setTimeout(() => {
+      console.log("¡Promesa resuelta!");
+    }, 2000)
+  );
+});
+console.log(promesa3);
+
+async function promesas() {
+  Promise.all([promesa, promesa2, promesa3])
+    .then((results) => {
+      console.log("Se ha resuelto las promesas", results);
+    })
+    .catch((error) => {
+      console.error("Ha ocurrido un error", error);
+    });
+}
 ```
