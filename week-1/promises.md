@@ -259,12 +259,11 @@ let promesa3 = new Promise((resolve, rejected) => {
 console.log(promesa3);
 
 async function promesas() {
-  Promise.all([promesa, promesa2, promesa3])
-    .then((results) => {
-      console.log("Se ha resuelto las promesas", results);
-    })
-    .catch((error) => {
-      console.error("Ha ocurrido un error", error);
-    });
+  try {
+    let resuls = await Promise.all([promesa, promesa2, promesa3]);
+    console.log("Se han resuelto las promesas", results);
+  } catch (error) {
+    console.error("Ha ocurrido un error", error);
+  }
 }
 ```
